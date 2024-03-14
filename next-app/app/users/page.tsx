@@ -10,11 +10,16 @@ const page = async ({searchParams:{sort}}:Props) => {
 
  console.log(sort)
   return (
-    <div className='text-center p-5 flex justify-center items-center '>
+    <>
+   
+    <div className='text-center p-5 flex flex-col justify-center items-center '>
 
-        
+    <h1>
+      Users
+    </h1>
    <UserTable sortOrder={sort}/>
       </div>
+    </>
   )
 }
 
