@@ -4,7 +4,7 @@ import React from 'react'
 const Navbar = () => {
   return (
     <div className='flex justify-start gap-8 bg-slate-200 p-4'>
-        <Link href='/'>
+        <Link href='/' className='font-bold text-2xl'>
             Next.js
         </Link>
         <Link href='/users'>
