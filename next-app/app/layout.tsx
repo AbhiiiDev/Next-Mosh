@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "./Navbar";
+import { Suspense } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,11 +22,12 @@ export default function RootLayout({
       <body className={inter.className}>
         <Navbar/>
         <main className="p-4">
+          <Suspense fallback={<span className="loading loading-dots loading-lg text-center"></span>}>
+
         {children}
+          </Suspense>
 
         </main>
-        
-        
         </body>
     </html>
   );

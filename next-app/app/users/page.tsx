@@ -1,5 +1,5 @@
 
-import React, { use } from 'react'
+import React, { Suspense, use } from 'react'
 import UserTable from '@/app/users/UserTable' 
 
 interface Props{
@@ -17,7 +17,10 @@ const page = async ({searchParams:{sort}}:Props) => {
     <h1>
       Users
     </h1>
+    <Suspense fallback={<span className="loading loading-dots loading-lg"></span>}>
+
    <UserTable sortOrder={sort}/>
+    </Suspense>
       </div>
     </>
   )
