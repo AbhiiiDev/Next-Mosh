@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from 'next/link'
 import {sort} from 'fast-sort';
-import { useRouter } from 'next/navigation';
+
 
 interface User{
     name:string,
@@ -11,10 +11,13 @@ interface User{
   }
 
 interface Props{
-  sortOrder:string
+  sortOrder:string,
+  error:Error;
+  reset:()=>void;
 }
 
-const UserTable = async ({sortOrder}:Props) => {
+const UserTable = async ({sortOrder,error,reset}:Props) => {
+  console.log(error)
 
   const response=await fetch('https://jsonplaceholder.typicode.com/users/',
   {cache:'no-cache'}
@@ -23,8 +26,9 @@ const UserTable = async ({sortOrder}:Props) => {
 
     const sortedUser= sort(users).asc(sortOrder==='email'?user=>user.email:user=>user.name);
 
-  
+
   return (
+
     <div>
       <Link href='/users/new' className='btn m-2'>
         Create a user
@@ -58,6 +62,7 @@ const UserTable = async ({sortOrder}:Props) => {
           </tbody>
       </table>
       <button className='btn btn-primary'>Go to Home </button>
+      {/* <button className='btn' onClick={()=>reset()}>Retry</button> */}
     </div>
   )
 }
