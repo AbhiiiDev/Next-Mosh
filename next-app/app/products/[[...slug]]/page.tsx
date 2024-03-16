@@ -1,5 +1,5 @@
 'use client';
-import { useRouter } from 'next/navigation'
+
 import React from 'react'
 
 
@@ -16,7 +16,7 @@ const page = ({params:{slug},searchParams:{sort}}:Props) => {
     <div>
       this page url : <span className='font-extrabold text-xl'>{slug}</span>  query params :<span className='font-extrabold text-xl'> {sort} </span>       
     
-    <button className='btn btn-primary' onClick={()=>router}> Go to User page</button>
+    <button className='btn btn-primary'> Go to User page</button>
     </div>
   )
 }
