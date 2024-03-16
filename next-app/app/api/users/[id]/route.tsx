@@ -23,3 +23,22 @@ export function GET(request: NextRequest,
 }
 
 
+export async function DELETE(request:NextRequest,{params:{id}}:Props)
+{
+const body=await request.json();
+
+if(!body)
+{
+    return NextResponse.json({error:'cant be empty'},{status:400});
+
+}
+
+if(id>10)
+{
+    return NextResponse.json({error:'User cant be found'},{status:404});
+
+}
+
+return NextResponse.json({});
+
+}
