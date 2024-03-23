@@ -1,24 +1,27 @@
+import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
 interface Props{
-    params:{id:number}
+    params:{id:string}
 }
 
 
-export function GET(request: NextRequest,
+export async function GET(request: NextRequest,
    {params:{id}}:Props )
 {
 
-    if(id>10)
-    {
-        return NextResponse.json({error:'user not found'},{status:404})
+const user=await prisma.user.findUnique({
+    where:{
+        id: parseInt(id)
     }
+})
 
-    else 
-    {
-        return NextResponse.json({id:1, name:'Mosh Hamdani'});
-
-    }
+if(user)
+{
+    return NextResponse.json(user,{status:200});
+}
+else 
+return NextResponse.json({error:"user you requested is not present"},{status:400});
 
 }
 
