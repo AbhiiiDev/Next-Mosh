@@ -71,20 +71,25 @@ else {
 
 export async function DELETE(request:NextRequest,{params:{id}}:Props)
 {
-const body=await request.json();
 
-if(!body)
+const user=await prisma.user.findUnique({
+    where: {
+        id:parseInt(id)
+    }
+})
+
+if(user)
 {
-    return NextResponse.json({error:'cant be empty'},{status:400});
+  await prisma.user.delete({
+        where:{
+            id:parseInt(id)
+        }
+    })
 
+    return NextResponse.json({},{status:200});
 }
 
-if(parseInt(id)>10)
-{
-    return NextResponse.json({error:'User cant be found'},{status:404});
-
-}
-
-return NextResponse.json({});
+else 
+return NextResponse.json({error:"user you requested doen't exists"},{status:400});
 
 }
