@@ -1,15 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import schema from "./schema";
+import prisma from "@/prisma/client";
 
 
 // the request object is added to prevent caching of data
 
-export function GET(request:NextRequest)
+export async function GET(request:NextRequest)
 {
-    return NextResponse.json([
-        { id:1, name:"Abhishek"},
-        { id:2, name:"Aditya"}
-    ])
+
+    const users=await prisma.user.findMany();
+
+
+    return NextResponse.json(users,{status:200});
 }
 
 
@@ -23,8 +25,24 @@ export async function POST(request:NextRequest)
     return NextResponse.json(validation.error.errors,{status:404});
  }
 
+ const alreadyUser=await prisma.user.findUnique({
+    where:{
+        email:body.email
+    }
+ })
+if(alreadyUser)
+{
+    return NextResponse.json({error:"user already existed"},{status:400});
+}
 
- return NextResponse.json(body);
+ const user=await prisma.user.create({
+    data:{
+        name:body.name,
+        email:body.email,
+    }
+ })
+
+ return NextResponse.json(user,{status:201});
 }
 
 
