@@ -24,6 +24,26 @@ const [publicId,setPublicId]=useState('');
     }
    
 <CldUploadWidget uploadPreset="f6vfpl7p"
+options={{
+    sources:['local'],
+    styles:{
+        palette: {
+            window: "#464040",
+            sourceBg: "#292222",
+            windowBorder: "#c7a49f",
+            tabIcon: "#cc6600",
+            inactiveTabIcon: "#E8D5BB",
+            menuIcons: "#ebe5db",
+            link: "#ffb107",
+            action: "#ffcc00",
+            inProgress: "#99cccc",
+            complete: "#78b3b4",
+            error: "#ff6666",
+            textDark: "#4C2F1A",
+            textLight: "#D8CFCF"
+        },
+    }
+}}
 onUpload={(result,widget)=>{
     console.log(result)
     if(result.event!=='success') return;
