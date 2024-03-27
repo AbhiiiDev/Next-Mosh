@@ -16,6 +16,9 @@ const Navbar = () => {
         <Link href='/admin'>
             Admin
         </Link>
+        <Link href='/api/auth/signin'>
+            Login
+        </Link>
       
       
       

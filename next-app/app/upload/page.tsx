@@ -1,6 +1,6 @@
 'use client';
 
-import { error } from 'console';
+
 import { CldUploadWidget ,CldImage } from 'next-cloudinary';
 import { useState } from 'react';
  
@@ -14,8 +14,6 @@ const page = () => {
 const [publicId,setPublicId]=useState('');
 
   return (
-
-
 
     <>
     {
