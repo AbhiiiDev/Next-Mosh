@@ -1,12 +1,22 @@
 'use client';
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
-import React from 'react'
+import React, { useState } from 'react'
 
 const Navbar = () => {
 
     const {data:session,status}=useSession();
 
+    const [isDropDown,setDropDown]=useState(false);
+
+
+    const handleHover=()=>{
+setDropDown(true);
+    }
+
+    const handleLeave=()=>{
+setDropDown(false);
+    }
 
 
   return (
@@ -30,9 +40,22 @@ const Navbar = () => {
 
       {
         status ==='authenticated' && 
-        <div>
-            {session.user?.name}
-        </div>
+        <div className='' onMouseEnter={handleHover} onMouseLeave={handleLeave}>
+          <span className='relative'>
+             {session.user?.name}
+            
+            </span> 
+            {
+                isDropDown &&
+
+                <span className='top-0'>
+                    <Link href='/api/auth/signout'>
+                        SignOut
+                    </Link>
+                </span>
+            }
+        
+    </div>
       }
       
       {
